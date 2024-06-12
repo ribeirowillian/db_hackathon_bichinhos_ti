@@ -2,9 +2,9 @@
 
 Este repositório contém as definições de tabelas para um banco de dados de uma instituição educacional. A estrutura abrange informações sobre cursos, professores, turmas, alunos, disciplinas, horários, notas, matrículas e logins.
 
-![1718220687801](image/README/1718220687801.png)
+![er](image/README/imag-er.png)
 
-## Tabelas
+Tabelas
 
 1. Cursos
    id_curso: Identificador único do curso (chave primária).
