@@ -6,7 +6,7 @@ Este projeto envolve a criação e gerenciamento de um banco de dados no Postgre
 
 Segue o esquema do banco de dados.
 
-![er](image/README/er_bichinhos.png)
+![er](image/README/erbichinhos.png)
 
 ### Tabelas
 
