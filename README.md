@@ -9,30 +9,39 @@ Segue o esquema do banco de dados.
 ![er](image/README/er_bichinhos.png)
 
 ### Tabelas
-1. **Usuarios**
-   - Armazena informações dos usuários.
-   
+
+1. **Alunos**
+
+   - Armazena informações dos alunos.
 2. **Login**
+
    - Armazena informações de login, com senha criptografada.
-   
 3. **Certificados**
-   - Armazena informações sobre os certificados dos usuários.
-   
+
+   - Armazena informações sobre os certificados dos alunos.
 4. **Projetos**
-   - Armazena informações sobre os projetos dos usuários.
-   
-5. **Logs**
+
+   - Armazena informações sobre os projetos dos alunos.
+5. **Mentor**
+
+   - Armazena informações sobre os mentores dos alunos.
+6. **Logs**
+
    - Armazena logs de operações (inserção, atualização, deleção) realizadas nas tabelas acima.
 
 ### Arquivos
+
 - **tables.sql**
+
   - Contém as definições de tabelas e tipos ENUM.
-  
 - **triggers.sql**
+
   - Contém as definições de funções e triggers para logs e criptografia de senha.
 
 ## Administração
+
 O banco de dados será administrado e abordado inteiramente no PostgreSQL, utilizando as ferramentas disponíveis no pgAdmin4.
 
 ## Autor
+
 Projeto desenvolvido para o Hackathon: Bichinhos da TI por Willan Ribeiro dos Santos(https://github.com/ribeirowillian) e Juan Lucas Lopes Vieira (https://github.com/ju4nv1e1r4).

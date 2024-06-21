@@ -4,18 +4,15 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- Criar tipos ENUM
 CREATE TYPE option_role AS ENUM ('Mentor', 'Lider', 'Membro');
 CREATE TYPE option_ch AS ENUM ('S', 'N');
-CREATE TYPE option_squad AS ENUM ('Backend', 'Cyber', 'Dados', 'Frontend', 'Games','Mobile','QA','UXUI','Produto','Marketing','Mentor_Academy');
+CREATE TYPE option_squad AS ENUM ('Backend', 'Cyber', 'Dados', 'Frontend', 'Games', 'Mobile', 'QA', 'UXUI', 'Produto', 'Marketing', 'Mentor_Academy');
 
--- Criar tabela Usuarios
-CREATE TABLE Usuarios(
+-- Criar tabela Alunos (anteriormente Usuarios)
+CREATE TABLE Alunos(
     IdUser SERIAL PRIMARY KEY,
     Nome TEXT NOT NULL,
     Email TEXT NOT NULL,
     Linkedin TEXT,
     DiscordUser TEXT,
-    PermissionDiscord TEXT,
-    Justificativa TEXT,
-    Motivacao TEXT,
     Funcao option_role NOT NULL,
     Carga_horaria option_ch NOT NULL,
     Squad option_squad NOT NULL
@@ -27,7 +24,7 @@ CREATE TABLE Login(
     IdUser INTEGER NOT NULL,
     Username TEXT NOT NULL,
     Password TEXT NOT NULL,
-    CONSTRAINT fk_usuario_login FOREIGN KEY(IdUser) REFERENCES Usuarios(IdUser)
+    CONSTRAINT fk_aluno_login FOREIGN KEY(IdUser) REFERENCES Alunos(IdUser)
 );
 
 -- Criar função para criptografar a senha
@@ -52,7 +49,7 @@ CREATE TABLE Projetos(
     DataInicio DATE,
     DataFim DATE,
     IdUser INTEGER NOT NULL,
-    CONSTRAINT fk_usuario_projeto FOREIGN KEY(IdUser) REFERENCES Usuarios(IdUser)
+    CONSTRAINT fk_aluno_projeto FOREIGN KEY(IdUser) REFERENCES Alunos(IdUser)
 );
 
 -- Criar tabela Certificados
@@ -62,8 +59,22 @@ CREATE TABLE Certificados(
     NomeCertificado TEXT NOT NULL,
     DataEmissao DATE,
     Instituicao TEXT,
-    CONSTRAINT fk_usuario_certificado FOREIGN KEY(IdUser) REFERENCES Usuarios(IdUser)
+    CONSTRAINT fk_aluno_certificado FOREIGN KEY(IdUser) REFERENCES Alunos(IdUser)
 );
 
-
-docker run --name bichinhos -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=bichinhos -p 5432:5432 -d postgres
+-- Criar tabela Mentor
+CREATE TABLE Mentor(
+    IdMentor SERIAL PRIMARY KEY,
+    Nome TEXT NOT NULL,
+    Email TEXT NOT NULL,
+    Linkedin TEXT,
+    Squad option_squad NOT NULL,
+    IdCertificado INTEGER,
+    IdAluno INTEGER,
+    IdLogin INTEGER,
+    IdProjeto INTEGER,
+    CONSTRAINT fk_certificado_mentor FOREIGN KEY(IdCertificado) REFERENCES Certificados(IdCertificado),
+    CONSTRAINT fk_aluno_mentor FOREIGN KEY(IdAluno) REFERENCES Alunos(IdUser),
+    CONSTRAINT fk_login_mentor FOREIGN KEY(IdLogin) REFERENCES Login(IdLogin),
+    CONSTRAINT fk_projeto_mentor FOREIGN KEY(IdProjeto) REFERENCES Projetos(IdProjeto)
+);
